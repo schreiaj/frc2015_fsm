@@ -141,6 +141,9 @@ Changing the cycle elevator method to update the data...
 ```elixir
     # lib/frc2015_fsm.ex
     defevent cycle_elevator, data: totes do
+      if totes >= 6 do
+        raise "Stack Too High"
+      end
       next_state :stack_tote, totes + 1
     end
 ```
