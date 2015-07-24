@@ -1,6 +1,10 @@
 defmodule Frc2015FsmTest do
   use ExUnit.Case
 
+  test "initially we have 0 totes" do
+    assert Robot.new.data == 0
+  end
+
   test "we start aligned to the human player" do
     assert Robot.new.state == :align_to_hp
   end
@@ -38,4 +42,56 @@ defmodule Frc2015FsmTest do
         |> Robot.hp_feed
       end
   end
+
+  test "we can drive to deliver a stack" do
+    bot = Robot.new
+       |> Robot.hp_feed
+       |> Robot.cycle_elevator
+       |> Robot.drive
+    assert bot.state == :deliver_stack
+  end
+
+  test "while intaking a tote we can drop the stack" do
+    bot = Robot.new |> Robot.hp_feed |> Robot.drop_stack
+    assert bot.state == :align_to_hp
+  end
+
+  test "while stacking a tote we can drop the stack" do
+    bot = Robot.new |> Robot.hp_feed |> Robot.cycle_elevator |>Robot.drop_stack
+    assert bot.state == :align_to_hp
+  end
+
+
+  test "while delivering a stack we can drop the stack" do
+    bot = Robot.new |> Robot.hp_feed |> Robot.cycle_elevator |> Robot.drive |> Robot.drop_stack
+    assert bot.state == :align_to_hp
+  end
+
+  test "cycling the elevator increments our totes" do
+    bot = Robot.new
+       |> Robot.hp_feed
+       |> Robot.cycle_elevator
+    assert bot.data == 1
+  end
+
+  test "cycling the elevator 7 times fails" do
+    assert_raise RuntimeError, fn ->
+      Robot.new
+         |> Robot.hp_feed
+         |> Robot.cycle_elevator
+         |> Robot.hp_feed
+         |> Robot.cycle_elevator
+         |> Robot.hp_feed
+         |> Robot.cycle_elevator
+         |> Robot.hp_feed
+         |> Robot.cycle_elevator
+         |> Robot.hp_feed
+         |> Robot.cycle_elevator
+         |> Robot.hp_feed
+         |> Robot.cycle_elevator
+         |> Robot.hp_feed
+         |> Robot.cycle_elevator
+      end
+  end
+
 end
