@@ -157,3 +157,6 @@ There's also a couple tests added for when you stack too high in the source, che
 #### Bonus
 
 Ok, common question - how do I know if I tested what needs to be tested. That's called code coverage, I've added a library called [excoveralls](https://github.com/parroty/excoveralls) to this repo. You can run it with ```MIX_ENV=test mix coveralls``` (you'll have to ```mix deps.get``` first) and it'll tell you the code coverage. The higher this is, the better your tests are.
+
+
+As always, the code is available over on [github](https://github.com/schreiaj/frc2015_fsm). 
