@@ -150,3 +150,10 @@ Changing the cycle elevator method to update the data...
 
 
 There's also a couple tests added for when you stack too high in the source, check it out if you're curious. If you've read this far you're probably starting to see where we're going with this. So far, we've built a reasonably functional state machine for a robot's behavior. The next article is going to focus on actually figuring out how many points this robot could score in a match. And will give you a framework to build other options in. The important thing I want to make sure everyone knows, this analysis is not intended to be done after the season, it's meant to be done the first few days of kickoff. While there seems to be a lot of code here, most of it was written in a couple of hours while writing this article (the article and the code are actually written simultaneously so I know I don't miss anything). It's absolutely doable the day after kickoff to have several models set up that you can tweak parameters on.
+
+
+
+
+#### Bonus
+
+Ok, common question - how do I know if I tested what needs to be tested. That's called code coverage, I've added a library called [excoveralls](https://github.com/parroty/excoveralls) to this repo. You can run it with ```MIX_ENV=test mix coveralls``` (you'll have to ```mix deps.get``` first) and it'll tell you the code coverage. The higher this is, the better your tests are.

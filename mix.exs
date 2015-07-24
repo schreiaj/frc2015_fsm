@@ -7,6 +7,7 @@ defmodule Frc2015Fsm.Mixfile do
      elixir: "~> 1.0",
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
+     test_coverage: [tool: ExCoveralls],
      deps: deps]
   end
 
@@ -27,6 +28,6 @@ defmodule Frc2015Fsm.Mixfile do
   #
   # Type `mix help deps` for more examples and options
   defp deps do
-    [{:fsm, "~> 0.2.0"}]
+    [{:fsm, "~> 0.2.0"},{:excoveralls, "~> 0.3", only: :test}]
   end
 end
